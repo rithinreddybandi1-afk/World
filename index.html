@@ -4,319 +4,681 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#081c24">
-  <meta name="description" content="Explore the world with WorldTrip. Plan budget and premium trips with maps and trip cost estimates.">
-  <title>WorldTrip | Explore Beyond Ordinary</title>
+  <meta name="theme-color" content="#f8f7f2">
+
+  <title>WorldTrip — Discover More. Travel Better.</title>
+
+  <meta
+    name="description"
+    content="Discover remarkable destinations, plan memorable journeys, and estimate your travel budget with WorldTrip."
+  >
+
+  <meta property="og:title" content="WorldTrip — Your Next Story Starts Here">
+  <meta
+    property="og:description"
+    content="Explore destinations, plan trips, and calculate your travel budget."
+  >
+  <meta property="og:type" content="website">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
+  <!-- Map styles and library -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  >
+</head>
+
+<body>
+  <a href="#main" class="visually-hidden">Skip to main content</a>
+
+  <div class="announcement-bar">
+    Make room for your next adventure.
+    <a href="#planner">Start planning →</a>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="WorldTrip home">
+        <span class="brand-mark" aria-hidden="true">W</span>
+        <span>WorldTrip<span style="color:#087653">.</span></span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#destinations">Destinations</a>
+        <a href="#experiences">Experiences</a>
+        <a href="#planner">Trip planner</a>
+        <a href="#calculator">Budget</a>
+        <a href="#map-section">Explore map</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="btn btn-ghost" id="loginButton" type="button">
+          Log in
+        </button>
+        <a class="btn btn-primary" href="#planner">Plan a trip ↗</a>
+        <button
+          class="mobile-menu-btn"
+          id="mobileMenuBtn"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="navLinks"
+        >
+          ☰
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="grid grid-2" style="align-items:center;gap:40px">
+          <div class="hero-content">
+            <div class="eyebrow">Your world, beautifully explored</div>
+
+            <h1>
+              Your next story
+              <span class="text-accent">starts here.</span>
+            </h1>
+
+            <p>
+              From hidden Indian gems to extraordinary journeys abroad,
+              discover places that stay with you long after you return.
+            </p>
+
+            <div class="cluster" style="margin-top:26px">
+              <a class="btn btn-primary" href="#destinations">
+                Explore destinations ↗
+              </a>
+              <a class="btn btn-secondary" href="#planner">
+                Build my itinerary
+              </a>
+            </div>
+
+            <div class="cluster" style="margin-top:28px;gap:20px">
+              <div>
+                <strong>India + worldwide</strong>
+                <div class="text-muted text-small">Explore destinations</div>
+              </div>
+              <div>
+                <strong>Budget in ₹</strong>
+                <div class="text-muted text-small">Plan your expenses</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <img
+              class="hero-image"
+              src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=85"
+              alt="Dramatic mountain peaks rising above the clouds"
+              fetchpriority="high"
+            >
+            <p class="text-muted text-small" style="margin-top:12px">
+              Extraordinary places. Thoughtfully planned journeys.
+            </p>
+          </div>
+        </div>
+
+        <!-- DESTINATION SEARCH -->
+        <div class="search-panel" style="margin-top:36px">
+          <div class="search-field">
+            <label for="destinationSearch">Where do you want to go?</label>
+            <input
+              id="destinationSearch"
+              type="search"
+              placeholder="Search a country, city or place"
+              autocomplete="off"
+            >
+          </div>
+
+          <button class="btn btn-primary" id="searchDestinations" type="button">
+            Discover places →
+          </button>
+        </div>
+
+        <p class="text-muted text-small" id="searchMessage" aria-live="polite" style="margin-top:10px"></p>
+      </div>
+    </section>
+
+    <!-- DESTINATIONS -->
+    <section class="section" id="destinations">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Handpicked inspiration</div>
+          <h2>Places worth <span class="text-accent">the journey.</span></h2>
+          <p>
+            Discover remarkable landscapes, vibrant cities, peaceful escapes
+            and unforgettable cultural experiences.
+          </p>
+        </div>
+
+        <div class="filter-list" style="margin-bottom:26px">
+          <button class="filter-chip active" type="button" data-category="all" aria-pressed="true">All places</button>
+          <button class="filter-chip" type="button" data-category="nature" aria-pressed="false">Nature</button>
+          <button class="filter-chip" type="button" data-category="culture" aria-pressed="false">Culture</button>
+          <button class="filter-chip" type="button" data-category="beach" aria-pressed="false">Beaches</button>
+          <button class="filter-chip" type="button" data-category="city" aria-pressed="false">Cities</button>
+        </div>
+
+        <div class="destination-grid" id="destinationGrid">
+
+          <article class="destination-card" data-category="nature" data-search="swiss alps switzerland mountains nature hiking">
+            <img
+              src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=900&q=80"
+              alt="Mountain landscape in Switzerland"
+              loading="lazy"
+            >
+            <div class="destination-card-content">
+              <div class="destination-meta">EUROPE · NATURE</div>
+              <h3>Swiss Alps</h3>
+              <p>Mountain scenery, alpine villages and unforgettable trails.</p>
+              <a href="#planner" class="destination-plan" data-place="Swiss Alps, Switzerland">Plan this journey ↗</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-category="culture" data-search="varanasi india temples culture ganga ghats">
+            <img
+              src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=900&q=80"
+              alt="Historic architecture and riverfront in India"
+              loading="lazy"
+            >
+            <div class="destination-card-content">
+              <div class="destination-meta">INDIA · CULTURE</div>
+              <h3>Varanasi</h3>
+              <p>Historic riverfronts, spiritual traditions and living heritage.</p>
+              <a href="#planner" class="destination-plan" data-place="Varanasi, India">Plan this journey ↗</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-category="beach" data-search="bali indonesia beaches island tropical">
+            <img
+              src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=80"
+              alt="Tropical landscape in Bali"
+              loading="lazy"
+            >
+            <div class="destination-card-content">
+              <div class="destination-meta">INDONESIA · ISLAND</div>
+              <h3>Bali</h3>
+              <p>Tropical scenery, island culture and restorative getaways.</p>
+              <a href="#planner" class="destination-plan" data-place="Bali, Indonesia">Plan this journey ↗</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-category="city" data-search="kyoto japan city culture temples gardens">
+            <img
+              src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=900&q=80"
+              alt="Traditional street in Kyoto, Japan"
+              loading="lazy"
+            >
+            <div class="destination-card-content">
+              <div class="destination-meta">JAPAN · HERITAGE</div>
+              <h3>Kyoto</h3>
+              <p>Traditional streets, tranquil gardens and historic temples.</p>
+              <a href="#planner" class="destination-plan" data-place="Kyoto, Japan">Plan this journey ↗</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-category="nature" data-search="ladakh india mountains lakes adventure">
+            <img
+              src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=80"
+              alt="Mountain peaks under a starry sky"
+              loading="lazy"
+            >
+            <div class="destination-card-content">
+              <div class="destination-meta">INDIA · ADVENTURE</div>
+              <h3>Ladakh</h3>
+              <p>High-altitude landscapes, mountain roads and vast open skies.</p>
+              <a href="#planner" class="destination-plan" data-place="Leh, Ladakh, India">Plan this journey ↗</a>
+            </div>
+          </article>
+
+          <article class="destination-card" data-category="city" data-search="paris france city architecture art food">
+            <img
+              src="https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=900&q=80"
+              alt="Paris rooftops and historic city architecture"
+              loading="lazy"
+            >
+            <div class="destination-card-content">
+              <div class="destination-meta">FRANCE · CITY ESCAPE</div>
+              <h3>Paris</h3>
+              <p>Art, architecture, elegant streets and world-famous landmarks.</p>
+              <a href="#planner" class="destination-plan" data-place="Paris, France">Plan this journey ↗</a>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="text-muted text-small" style="margin-top:24px">
+          Featured examples are for inspiration. Destination listings will expand
+          in the next development steps.
+        </p>
+      </div>
+    </section>
+
+    <!-- EXPERIENCES -->
+    <section class="section" id="experiences" style="background:#fffefa">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Travel your way</div>
+          <h2>One world. <span class="text-accent">Endless possibilities.</span></h2>
+          <p>
+            Build a journey around the things you love, from nature and
+            heritage to food, relaxation and adventure.
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <div class="card-body">
+              <div class="eyebrow">01 · Discover</div>
+              <h3>Nature & adventure</h3>
+              <p>Mountains, waterfalls, forests, lakes and outdoor escapes.</p>
+              <a href="#destinations">Explore destinations ↗</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-body">
+              <div class="eyebrow">02 · Experience</div>
+              <h3>Culture & heritage</h3>
+              <p>Temples, historic monuments, local traditions and museums.</p>
+              <a href="#destinations">Find cultural places ↗</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-body">
+              <div class="eyebrow">03 · Unwind</div>
+              <h3>Stays & food</h3>
+              <p>Hotels, resorts, cafés, restaurants and memorable stays.</p>
+              <a href="#planner">Plan your escape ↗</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRIP PLANNER -->
+    <section class="section" id="planner">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Your journey, your rules</div>
+          <h2>Make a plan. <span class="text-accent">Make it yours.</span></h2>
+          <p>
+            Start with your destination and travel details. We will connect
+            this form to the full itinerary and cost calculation in later steps.
+          </p>
+        </div>
+
+        <div class="calculator-card">
+          <form id="tripForm">
+            <div class="form-grid">
+
+              <div class="form-group">
+                <label for="tripOrigin">Starting location</label>
+                <input
+                  id="tripOrigin"
+                  name="origin"
+                  placeholder="e.g. Vijayawada, India"
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="tripDestination">Destination</label>
+                <input
+                  id="tripDestination"
+                  name="destination"
+                  placeholder="e.g. Kerala, India"
+                  required
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="tripStart">Departure date</label>
+                <input id="tripStart" name="startDate" type="date" required>
+              </div>
+
+              <div class="form-group">
+                <label for="tripEnd">Return date</label>
+                <input id="tripEnd" name="endDate" type="date" required>
+              </div>
+
+              <div class="form-group">
+                <label for="tripTravellers">Travellers</label>
+                <select id="tripTravellers" name="travellers">
+                  <option value="1">1 traveller</option>
+                  <option value="2" selected>2 travellers</option>
+                  <option value="3">3 travellers</option>
+                  <option value="4">4 travellers</option>
+                  <option value="5">5 travellers</option>
+                  <option value="6">6 travellers</option>
+                  <option value="7">7+ travellers</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="tripStyle">Travel style</label>
+                <select id="tripStyle" name="style">
+                  <option value="budget">Budget-friendly</option>
+                  <option value="comfort" selected>Comfort</option>
+                  <option value="premium">Premium</option>
+                </select>
+              </div>
+
+            </div>
+
+            <button class="btn btn-primary" type="submit" style="margin-top:24px">
+              Create my trip plan ↗
+            </button>
+
+            <p id="tripMessage" class="text-muted text-small" aria-live="polite" style="margin-top:14px"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUDGET CALCULATOR -->
+    <section class="section" id="calculator" style="background:#eef2e9">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Know before you go</div>
+          <h2>Your journey. <span class="text-accent">Your budget.</span></h2>
+          <p>
+            Plan transport, accommodation, meals and experiences with a
+            transparent budget in Indian rupees.
+          </p>
+        </div>
+
+        <div class="grid grid-2" style="align-items:center">
+          <div>
+            <h3>Travel confidently, spend thoughtfully.</h3>
+            <p>
+              A good trip begins with a realistic budget. Include your
+              expected expenses, then add a reserve for unexpected costs.
+            </p>
+            <ul>
+              <li>Transport and flights</li>
+              <li>Hotel rooms and number of nights</li>
+              <li>Food and local transportation</li>
+              <li>Activities, visa and other costs</li>
+              <li>Total cost and cost per traveller</li>
+            </ul>
+            <a class="btn btn-primary" href="#calculator-form">
+              Calculate trip cost ↓
+            </a>
+          </div>
+
+          <div class="calculator-card" id="calculator-form">
+            <div class="eyebrow">Travel budget</div>
+            <h3>Estimate your expenses</h3>
+            <p class="text-muted text-small">
+              Enter total amounts in ₹. The calculator will be implemented next.
+            </p>
+
+            <form id="moneyForm">
+              <div class="form-grid">
+
+                <div class="form-group">
+                  <label for="costTransport">Transport & flights (₹)</label>
+                  <input id="costTransport" name="transport" type="number" min="0" step="1" value="0" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="costHotel">Hotel cost per room/night (₹)</label>
+                  <input id="costHotel" name="hotelRate" type="number" min="0" step="1" value="0" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="costRooms">Number of rooms</label>
+                  <input id="costRooms" name="rooms" type="number" min="1" max="100" step="1" value="1" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="tripDays">Nights</label>
+                  <input id="tripDays" name="nights" type="number" min="0" max="365" step="1" value="2" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="costFood">Food per person/day (₹)</label>
+                  <input id="costFood" name="food" type="number" min="0" step="1" value="500" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="travellers">Number of travellers</label>
+                  <input id="travellers" name="travellers" type="number" min="1" max="100" step="1" value="2" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="costLocal">Local transport total (₹)</label>
+                  <input id="costLocal" name="localTransport" type="number" min="0" step="1" value="0" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="costActivities">Activities total (₹)</label>
+                  <input id="costActivities" name="activities" type="number" min="0" step="1" value="0" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="costVisa">Visa & insurance total (₹)</label>
+                  <input id="costVisa" name="visa" type="number" min="0" step="1" value="0" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="costOther">Other costs (₹)</label>
+                  <input id="costOther" name="other" type="number" min="0" step="1" value="0" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="costReserve">Emergency reserve (%)</label>
+                  <input id="costReserve" name="reserve" type="number" min="0" max="100" step="1" value="10" required>
+                </div>
+
+              </div>
+
+              <button class="btn btn-primary btn-block" type="submit" style="margin-top:22px">
+                Calculate my budget →
+              </button>
+
+              <div id="costResult" class="calculator-result" aria-live="polite" hidden></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP -->
+    <section class="section" id="map-section">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Explore the world</div>
+          <h2>Find your place <span class="text-accent">on the map.</span></h2>
+          <p>Search for destinations and explore their locations.</p>
+        </div>
+
+        <form id="mapSearchForm" class="search-panel">
+          <div class="search-field">
+            <label for="mapSearchInput">Search a place</label>
+            <input
+              id="mapSearchInput"
+              type="search"
+              placeholder="City, village, temple, beach or landmark"
+            >
+          </div>
+          <button class="btn btn-primary" type="submit">Find on map</button>
+        </form>
+
+        <div id="mapSearchResults" class="place-results" style="margin-top:18px"></div>
+
+        <div id="worldMap" style="margin-top:20px" aria-label="Interactive destination map"></div>
+
+        <p class="text-muted text-small" style="margin-top:12px">
+          Map search uses OpenStreetMap-based services. Search availability
+          depends on the map data and service usage limits.
+        </p>
+      </div>
+    </section>
+
+    <!-- SAVED TRIPS -->
+    <section class="section" id="saved-trips" style="background:#fffefa">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Your personal travel collection</div>
+          <h2>Journeys to <span class="text-accent">come back to.</span></h2>
+          <p>
+            Your future dashboard will show the itineraries and destinations
+            you save to your WorldTrip account.
+          </p>
+        </div>
+
+        <div id="savedTrips" class="grid grid-3">
+          <div class="empty-state">
+            <h3>Your next adventure belongs here.</h3>
+            <p>Sign in and save your first trip once the account system is connected.</p>
+            <button class="btn btn-secondary" id="savedTripsLogin" type="button">
+              Sign in to continue
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- AUTHENTICATION MODAL -->
+  <div
+    class="auth-backdrop hidden"
+    id="authBackdrop"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="authTitle"
+  >
+    <div class="auth-modal">
+      <div class="cluster" style="justify-content:space-between">
+        <a class="brand" href="#home">
+          <span class="brand-mark" aria-hidden="true">W</span>
+          <span>WorldTrip.</span>
+        </a>
+        <button
+          class="btn btn-ghost"
+          id="closeAuth"
+          type="button"
+          aria-label="Close sign-in dialog"
+        >✕</button>
+      </div>
+
+      <div style="margin-top:28px">
+        <div class="eyebrow">Welcome to WorldTrip</div>
+        <h2 id="authTitle">Your next journey awaits.</h2>
+        <p id="authDescription">Sign in to manage your travel plans.</p>
+      </div>
+
+      <div class="cluster" style="margin-block:20px">
+        <button class="btn btn-secondary" id="showLogin" type="button">Log in</button>
+        <button class="btn btn-secondary" id="showRegister" type="button">Create account</button>
+      </div>
+
+      <form id="authForm">
+        <div class="form-group" id="authNameGroup">
+          <label for="authName">Your name</label>
+          <input id="authName" name="name" autocomplete="name" placeholder="Full name">
+        </div>
+
+        <div class="form-group">
+          <label for="authEmail">Email address</label>
+          <input
+            id="authEmail"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="authPassword">Password</label>
+          <input
+            id="authPassword"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            minlength="8"
+            placeholder="At least 8 characters"
+            required
+          >
+        </div>
+
+        <button class="btn btn-primary btn-block" type="submit" id="authSubmit">
+          Continue
+        </button>
+
+        <button class="btn btn-ghost btn-block" type="button" id="forgotPassword">
+          Forgot password?
+        </button>
+
+        <button class="btn btn-secondary btn-block" type="button" id="googleLogin">
+          Continue with Google
+        </button>
+
+        <p id="authMessage" class="text-small" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="#home">
+            <span class="brand-mark" aria-hidden="true">W</span>
+            <span>WorldTrip.</span>
+          </a>
+          <p style="max-width:360px;margin-top:18px">
+            Discover extraordinary places. Plan thoughtful journeys.
+            Make every trip your own.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <strong>Explore</strong>
+          <a href="#destinations">Destinations</a>
+          <a href="#experiences">Experiences</a>
+          <a href="#map-section">World map</a>
+        </div>
+
+        <div class="footer-links">
+          <strong>Plan</strong>
+          <a href="#planner">Trip planner</a>
+          <a href="#calculator">Travel budget</a>
+          <a href="#saved-trips">Saved trips</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© <span id="currentYear"></span> WorldTrip. All rights reserved.</span>
+        <span>Created by BANDI RITHIN REDDY</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Libraries load before our application script -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
-<body>
-
-<header class="navbar">
-  <a class="logo" href="#home">
-    WORLD<span>TRIP</span>
-    <small>YOUR WORLD, REIMAGINED</small>
-  </a>
-
-  <button class="menu-toggle" id="menuToggle"
-    aria-label="Toggle navigation" aria-expanded="false">☰</button>
-
-  <nav id="navLinks">
-    <a href="#destinations">Destinations</a>
-    <a href="#planner">Trip Planner</a>
-    <a href="#worldtrip-tools">Map & Calculator</a>
-    <a href="#about">About</a>
-  </nav>
-
-  <div class="nav-actions">
-    <button class="login-btn" id="loginBtn">Log in</button>
-    <a href="#planner" class="gold-btn">Plan a Trip ↗</a>
-  </div>
-</header>
-
-<main>
-  <section class="hero" id="home">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <span class="eyebrow">✦ THE ART OF TRAVEL</span>
-      <h1>The world is<br>yours to <em>discover.</em></h1>
-      <p>Extraordinary places. Unforgettable moments.<br>
-        Your next great story starts here.</p>
-      <div class="hero-actions">
-        <a href="#destinations" class="gold-btn">Explore destinations ↗</a>
-        <a href="#planner" class="outline-btn">Plan your journey</a>
-      </div>
-      <div class="hero-note">✦ Discover more. Live more. Travel better.</div>
-    </div>
-  </section>
-
-  <section class="search-wrap">
-    <form class="search-bar" id="searchForm">
-      <label>
-        <span>YOUR DESTINATION</span>
-        <input id="destinationInput" type="search"
-          placeholder="City, country or destination">
-      </label>
-      <label>
-        <span>TRAVEL STYLE</span>
-        <select id="categorySelect">
-          <option value="all">All experiences</option>
-          <option value="Beach">Beaches</option>
-          <option value="Culture">Culture & heritage</option>
-          <option value="Adventure">Adventure</option>
-          <option value="Luxury">Luxury escapes</option>
-          <option value="Nature">Nature</option>
-        </select>
-      </label>
-      <button type="submit" class="gold-btn">Discover ↗</button>
-    </form>
-  </section>
-
-  <section class="section" id="destinations">
-    <div class="section-heading">
-      <div>
-        <span class="eyebrow dark-eyebrow">THE WORLD AWAITS</span>
-        <h2>Places that stay<br><em>with you forever.</em></h2>
-      </div>
-      <p>Discover famous destinations, hidden gems and extraordinary experiences around the world.</p>
-    </div>
-
-    <div class="filters" id="filters">
-      <button type="button" class="filter active" data-category="all">All</button>
-      <button type="button" class="filter" data-category="Beach">Beaches</button>
-      <button type="button" class="filter" data-category="Culture">Culture</button>
-      <button type="button" class="filter" data-category="Adventure">Adventure</button>
-      <button type="button" class="filter" data-category="Luxury">Luxury</button>
-      <button type="button" class="filter" data-category="Nature">Nature</button>
-    </div>
-
-    <div class="destination-grid" id="destinationGrid"></div>
-    <p id="emptyMessage" class="empty-message" hidden>
-      No destinations found. Try another search.
-    </p>
-    <div class="center">
-      <button type="button" class="outline-dark-btn" id="showMore">
-        Explore more destinations ↗
-      </button>
-    </div>
-  </section>
-
-  <section class="experience">
-    <div>
-      <span class="eyebrow">TRAVEL, YOUR WAY</span>
-      <h2>Not just a holiday.<br><em>A feeling.</em></h2>
-      <p>From beach escapes to mountain adventures, make your next trip your own.</p>
-      <a href="#planner" class="gold-btn">Plan your experience ↗</a>
-    </div>
-    <div class="experience-image"></div>
-  </section>
-
-  <section class="section planner-section" id="planner">
-    <div class="section-heading">
-      <div>
-        <span class="eyebrow dark-eyebrow">YOUR JOURNEY BEGINS</span>
-        <h2>Make the world<br><em>your itinerary.</em></h2>
-      </div>
-      <p>Choose a destination, group size and budget to generate a sample itinerary.</p>
-    </div>
-
-    <form class="planner-card" id="plannerForm">
-      <label>Starting city
-        <input id="startCity" placeholder="e.g. Vijayawada" required>
-      </label>
-      <label>Destination
-        <input id="planDestination" placeholder="e.g. Bali" required>
-      </label>
-      <label>Travelers
-        <input id="travelers" type="number" min="1" max="100" value="2" required>
-      </label>
-      <label>Duration
-        <select id="days">
-          <option value="3">3 days</option>
-          <option value="5" selected>5 days</option>
-          <option value="7">7 days</option>
-          <option value="10">10 days</option>
-          <option value="14">14 days</option>
-        </select>
-      </label>
-      <label>Budget per traveler (₹)
-        <input id="budget" type="number" min="1000" placeholder="50000" required>
-      </label>
-      <button type="submit" class="gold-btn planner-submit">
-        Create my trip ↗
-      </button>
-    </form>
-
-    <div id="plannerResult" class="planner-result" hidden></div>
-    <p class="disclaimer">Estimates are illustrative, not live travel quotations.</p>
-  </section>
-
-  <section class="section worldtrip-tools" id="worldtrip-tools">
-    <span class="eyebrow dark-eyebrow">YOUR WORLD, YOUR BUDGET</span>
-    <h2>Plan smarter.<br><em>Travel further.</em></h2>
-    <p class="tools-intro">
-      Explore destinations on a world map and compare budget and premium trips.
-    </p>
-
-    <div class="tools-card">
-      <h3>Explore worldwide destinations</h3>
-      <form id="placeSearchForm" class="tool-form">
-        <label>City, town or place
-          <input id="placeQuery" required
-            placeholder="e.g. Vijayawada, Araku Valley, Paris">
-        </label>
-        <button type="submit" class="gold-btn">Find on map ↗</button>
-      </form>
-      <p id="placeMessage" class="tool-message" aria-live="polite"></p>
-      <div id="worldMap" aria-label="Interactive OpenStreetMap"></div>
-      <div class="map-links">
-        <a id="directionsLink" href="https://www.openstreetmap.org/"
-          target="_blank" rel="noopener noreferrer">
-          Open directions in OpenStreetMap ↗
-        </a>
-      </div>
-      <p class="disclaimer">
-        Worldwide search coverage depends on OpenStreetMap data and service limits.
-      </p>
-    </div>
-
-    <div class="tools-card">
-      <h3>Trip money calculator</h3>
-      <p class="tools-intro">Enter your costs in INR to calculate your group total.</p>
-
-      <form id="moneyForm" class="tool-form money-form">
-        <label>Starting city
-          <input id="moneyOrigin" required placeholder="Vijayawada">
-        </label>
-        <label>Destination
-          <input id="moneyDestination" required placeholder="Bali">
-        </label>
-        <label>Travel style
-          <select id="travelStyle">
-            <option value="budget">Budget</option>
-            <option value="premium">Premium</option>
-          </select>
-        </label>
-        <label>Travelers
-          <input id="moneyTravelers" type="number" min="1" max="100" value="2" required>
-        </label>
-        <label>Days
-          <input id="moneyDays" type="number" min="1" max="365" value="5" required>
-        </label>
-        <label>Transport per traveler (₹)
-          <input id="costTransport" type="number" min="0" value="5000" required>
-        </label>
-        <label>Hotel per room per night (₹)
-          <input id="costHotel" type="number" min="0" value="2000" required>
-        </label>
-        <label>Number of rooms
-          <input id="costRooms" type="number" min="1" max="100" value="1" required>
-        </label>
-        <label>Food per person per day (₹)
-          <input id="costFood" type="number" min="0" value="700" required>
-        </label>
-        <label>Local transport per person per day (₹)
-          <input id="costLocal" type="number" min="0" value="300" required>
-        </label>
-        <label>Activities per person (₹)
-          <input id="costActivities" type="number" min="0" value="2000" required>
-        </label>
-        <label>Visa per traveler (₹)
-          <input id="costVisa" type="number" min="0" value="0" required>
-        </label>
-        <label>Other group expenses (₹)
-          <input id="costOther" type="number" min="0" value="0" required>
-        </label>
-        <label>Emergency reserve (%)
-          <input id="costReserve" type="number" min="0" max="100" value="10" required>
-        </label>
-        <button type="submit" class="gold-btn">Calculate trip cost ↗</button>
-      </form>
-
-      <div id="moneyResult" class="money-result" hidden aria-live="polite"></div>
-      <button type="button" id="saveTripButton" class="gold-btn" hidden>
-        Save trip to my account
-      </button>
-      <p id="saveTripMessage" class="tool-message" aria-live="polite"></p>
-    </div>
-
-    <div class="tools-card">
-      <h3>Your saved journeys</h3>
-      <p id="accountMessage" class="tool-message" aria-live="polite">
-        Log in to view your saved trips.
-      </p>
-      <button type="button" id="loadTripsButton" class="outline-dark-btn">
-        Load my saved trips
-      </button>
-      <div id="savedTrips"></div>
-    </div>
-  </section>
-
-  <section class="newsletter" id="about">
-    <span class="eyebrow">YOUR NEXT ADVENTURE AWAITS</span>
-    <h2>Your next story is<br><em>out there.</em></h2>
-    <p>Discover more. Live more. Travel better.</p>
-    <a href="#destinations" class="gold-btn">Explore WorldTrip ↗</a>
-  </section>
-</main>
-
-<footer>
-  <a class="logo footer-logo" href="#home">
-    WORLD<span>TRIP</span>
-    <small>YOUR WORLD, REIMAGINED</small>
-  </a>
-  <p>Discover more. Live more. Travel better.</p>
-  <p class="creator">Created by BANDI RITHIN REDDY</p>
-  <p class="copyright">© <span id="year"></span> WorldTrip. All rights reserved.</p>
-</footer>
-
-<div class="auth-backdrop" id="authBackdrop" hidden>
-  <section class="auth-card" role="dialog" aria-modal="true"
-    aria-labelledby="authTitle">
-    <button type="button" id="authClose" class="dialog-close"
-      aria-label="Close">✕</button>
-
-    <span class="eyebrow dark-eyebrow">WORLDTRIP ACCOUNT</span>
-    <h2 id="authTitle">Welcome<br><em>traveler.</em></h2>
-
-    <div class="auth-tabs">
-      <button type="button" data-auth-mode="login" class="auth-tab active">Log in</button>
-      <button type="button" data-auth-mode="signup" class="auth-tab">Create account</button>
-    </div>
-
-    <form id="authForm">
-      <label id="nameField" hidden>Full name
-        <input id="authName" autocomplete="name" maxlength="100">
-      </label>
-      <label>Email address
-        <input id="authEmail" type="email" autocomplete="email" required>
-      </label>
-      <label>Password
-        <input id="authPassword" type="password" minlength="8"
-          autocomplete="current-password" required>
-      </label>
-      <button id="authSubmit" class="gold-btn full-btn" type="submit">
-        Log in securely
-      </button>
-    </form>
-
-    <button id="resetPasswordButton" class="text-button" type="button">
-      Forgot password?
-    </button>
-    <p id="authMessage" class="tool-message" aria-live="polite"></p>
-    <button id="logoutButton" class="outline-dark-btn" type="button" hidden>
-      Log out
-    </button>
-  </section>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
