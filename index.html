@@ -3,25 +3,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#081c24">
-  <meta name="description" content="Discover extraordinary destinations worldwide with WorldTrip. Plan your next adventure.">
+  <meta name="description" content="Explore the world with WorldTrip. Plan budget and premium trips with maps and trip cost estimates.">
   <title>WorldTrip | Explore Beyond Ordinary</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
 <header class="navbar">
-  <a class="logo" href="#">WORLD<span>TRIP</span><small>YOUR WORLD, REIMAGINED</small></a>
+  <a class="logo" href="#home">
+    WORLD<span>TRIP</span>
+    <small>YOUR WORLD, REIMAGINED</small>
+  </a>
 
-  <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+  <button class="menu-toggle" id="menuToggle"
+    aria-label="Toggle navigation" aria-expanded="false">☰</button>
 
   <nav id="navLinks">
     <a href="#destinations">Destinations</a>
-    <a href="#experiences">Experiences</a>
     <a href="#planner">Trip Planner</a>
+    <a href="#worldtrip-tools">Map & Calculator</a>
     <a href="#about">About</a>
   </nav>
 
@@ -32,26 +42,27 @@
 </header>
 
 <main>
-  <section class="hero">
+  <section class="hero" id="home">
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <span class="eyebrow">✦ THE ART OF TRAVEL</span>
-      <h1>The world is<br> yours to <em>discover.</em></h1>
-      <p>Extraordinary places. Unforgettable moments.<br>Your next great story starts here.</p>
+      <h1>The world is<br>yours to <em>discover.</em></h1>
+      <p>Extraordinary places. Unforgettable moments.<br>
+        Your next great story starts here.</p>
       <div class="hero-actions">
         <a href="#destinations" class="gold-btn">Explore destinations ↗</a>
-        <a href="#planner" class="outline-btn">Create your journey</a>
+        <a href="#planner" class="outline-btn">Plan your journey</a>
       </div>
-      <div class="hero-note">✦ Curated journeys across the globe</div>
+      <div class="hero-note">✦ Discover more. Live more. Travel better.</div>
     </div>
-    <div class="hero-side">DISCOVER MORE · LIVE MORE · TRAVEL BETTER</div>
   </section>
 
   <section class="search-wrap">
     <form class="search-bar" id="searchForm">
       <label>
         <span>YOUR DESTINATION</span>
-        <input id="destinationInput" type="search" placeholder="Where do you want to go?">
+        <input id="destinationInput" type="search"
+          placeholder="City, country or destination">
       </label>
       <label>
         <span>TRAVEL STYLE</span>
@@ -64,7 +75,7 @@
           <option value="Nature">Nature</option>
         </select>
       </label>
-      <button type="submit" class="gold-btn search-btn">Discover ↗</button>
+      <button type="submit" class="gold-btn">Discover ↗</button>
     </form>
   </section>
 
@@ -74,29 +85,35 @@
         <span class="eyebrow dark-eyebrow">THE WORLD AWAITS</span>
         <h2>Places that stay<br><em>with you forever.</em></h2>
       </div>
-      <p>From hidden gems to iconic destinations, find the place that speaks to your soul.</p>
+      <p>Discover famous destinations, hidden gems and extraordinary experiences around the world.</p>
     </div>
 
     <div class="filters" id="filters">
-      <button class="filter active" data-category="all">All destinations</button>
-      <button class="filter" data-category="Beach">Beach escapes</button>
-      <button class="filter" data-category="Culture">Culture</button>
-      <button class="filter" data-category="Adventure">Adventure</button>
-      <button class="filter" data-category="Luxury">Luxury</button>
-      <button class="filter" data-category="Nature">Nature</button>
+      <button type="button" class="filter active" data-category="all">All</button>
+      <button type="button" class="filter" data-category="Beach">Beaches</button>
+      <button type="button" class="filter" data-category="Culture">Culture</button>
+      <button type="button" class="filter" data-category="Adventure">Adventure</button>
+      <button type="button" class="filter" data-category="Luxury">Luxury</button>
+      <button type="button" class="filter" data-category="Nature">Nature</button>
     </div>
 
     <div class="destination-grid" id="destinationGrid"></div>
-    <p id="emptyMessage" class="empty-message" hidden>No destinations found. Try another search.</p>
-    <div class="center"><button class="outline-dark-btn" id="showMore">Explore all destinations ↗</button></div>
+    <p id="emptyMessage" class="empty-message" hidden>
+      No destinations found. Try another search.
+    </p>
+    <div class="center">
+      <button type="button" class="outline-dark-btn" id="showMore">
+        Explore more destinations ↗
+      </button>
+    </div>
   </section>
 
-  <section class="experience" id="experiences">
+  <section class="experience">
     <div>
       <span class="eyebrow">TRAVEL, YOUR WAY</span>
       <h2>Not just a holiday.<br><em>A feeling.</em></h2>
-      <p>Sunset dinners, mountain air, ancient wonders and slow mornings beside the sea. Choose your own kind of extraordinary.</p>
-      <a href="#planner" class="gold-btn">Find your experience ↗</a>
+      <p>From beach escapes to mountain adventures, make your next trip your own.</p>
+      <a href="#planner" class="gold-btn">Plan your experience ↗</a>
     </div>
     <div class="experience-image"></div>
   </section>
@@ -107,203 +124,171 @@
         <span class="eyebrow dark-eyebrow">YOUR JOURNEY BEGINS</span>
         <h2>Make the world<br><em>your itinerary.</em></h2>
       </div>
-      <p>Start with a destination and a budget. Build a journey around your interests.</p>
+      <p>Choose a destination, group size and budget to generate a sample itinerary.</p>
     </div>
 
     <form class="planner-card" id="plannerForm">
       <label>Starting city
-        <input id="startCity" placeholder="e.g. Hyderabad" required>
+        <input id="startCity" placeholder="e.g. Vijayawada" required>
       </label>
       <label>Destination
-        <input id="planDestination" placeholder="e.g. Bali, Indonesia" required>
+        <input id="planDestination" placeholder="e.g. Bali" required>
       </label>
       <label>Travelers
-        <select id="travelers">
-          <option value="1">1 traveler</option>
-          <option value="2" selected>2 travelers</option>
-          <option value="3">3 travelers</option>
-          <option value="4">4 travelers</option>
-          <option value="5">5+ travelers</option>
-        </select>
+        <input id="travelers" type="number" min="1" max="100" value="2" required>
       </label>
       <label>Duration
         <select id="days">
-          <option value="3">3 days / 2 nights</option>
-          <option value="5" selected>5 days / 4 nights</option>
-          <option value="7">7 days / 6 nights</option>
-          <option value="10">10 days / 9 nights</option>
-          <option value="14">14 days / 13 nights</option>
+          <option value="3">3 days</option>
+          <option value="5" selected>5 days</option>
+          <option value="7">7 days</option>
+          <option value="10">10 days</option>
+          <option value="14">14 days</option>
         </select>
       </label>
       <label>Budget per traveler (₹)
-        <input id="budget" type="number" min="1000" placeholder="e.g. 50000" required>
+        <input id="budget" type="number" min="1000" placeholder="50000" required>
       </label>
-      <button type="submit" class="gold-btn planner-submit">Create my trip ↗</button>
+      <button type="submit" class="gold-btn planner-submit">
+        Create my trip ↗
+      </button>
     </form>
+
     <div id="plannerResult" class="planner-result" hidden></div>
-    <p class="disclaimer">Trip estimates are indicative only and are not live flight or hotel quotations.</p>
+    <p class="disclaimer">Estimates are illustrative, not live travel quotations.</p>
+  </section>
+
+  <section class="section worldtrip-tools" id="worldtrip-tools">
+    <span class="eyebrow dark-eyebrow">YOUR WORLD, YOUR BUDGET</span>
+    <h2>Plan smarter.<br><em>Travel further.</em></h2>
+    <p class="tools-intro">
+      Explore destinations on a world map and compare budget and premium trips.
+    </p>
+
+    <div class="tools-card">
+      <h3>Explore worldwide destinations</h3>
+      <form id="placeSearchForm" class="tool-form">
+        <label>City, town or place
+          <input id="placeQuery" required
+            placeholder="e.g. Vijayawada, Araku Valley, Paris">
+        </label>
+        <button type="submit" class="gold-btn">Find on map ↗</button>
+      </form>
+      <p id="placeMessage" class="tool-message" aria-live="polite"></p>
+      <div id="worldMap" aria-label="Interactive OpenStreetMap"></div>
+      <div class="map-links">
+        <a id="directionsLink" href="https://www.openstreetmap.org/"
+          target="_blank" rel="noopener noreferrer">
+          Open directions in OpenStreetMap ↗
+        </a>
+      </div>
+      <p class="disclaimer">
+        Worldwide search coverage depends on OpenStreetMap data and service limits.
+      </p>
+    </div>
+
+    <div class="tools-card">
+      <h3>Trip money calculator</h3>
+      <p class="tools-intro">Enter your costs in INR to calculate your group total.</p>
+
+      <form id="moneyForm" class="tool-form money-form">
+        <label>Starting city
+          <input id="moneyOrigin" required placeholder="Vijayawada">
+        </label>
+        <label>Destination
+          <input id="moneyDestination" required placeholder="Bali">
+        </label>
+        <label>Travel style
+          <select id="travelStyle">
+            <option value="budget">Budget</option>
+            <option value="premium">Premium</option>
+          </select>
+        </label>
+        <label>Travelers
+          <input id="moneyTravelers" type="number" min="1" max="100" value="2" required>
+        </label>
+        <label>Days
+          <input id="moneyDays" type="number" min="1" max="365" value="5" required>
+        </label>
+        <label>Transport per traveler (₹)
+          <input id="costTransport" type="number" min="0" value="5000" required>
+        </label>
+        <label>Hotel per room per night (₹)
+          <input id="costHotel" type="number" min="0" value="2000" required>
+        </label>
+        <label>Number of rooms
+          <input id="costRooms" type="number" min="1" max="100" value="1" required>
+        </label>
+        <label>Food per person per day (₹)
+          <input id="costFood" type="number" min="0" value="700" required>
+        </label>
+        <label>Local transport per person per day (₹)
+          <input id="costLocal" type="number" min="0" value="300" required>
+        </label>
+        <label>Activities per person (₹)
+          <input id="costActivities" type="number" min="0" value="2000" required>
+        </label>
+        <label>Visa per traveler (₹)
+          <input id="costVisa" type="number" min="0" value="0" required>
+        </label>
+        <label>Other group expenses (₹)
+          <input id="costOther" type="number" min="0" value="0" required>
+        </label>
+        <label>Emergency reserve (%)
+          <input id="costReserve" type="number" min="0" max="100" value="10" required>
+        </label>
+        <button type="submit" class="gold-btn">Calculate trip cost ↗</button>
+      </form>
+
+      <div id="moneyResult" class="money-result" hidden aria-live="polite"></div>
+      <button type="button" id="saveTripButton" class="gold-btn" hidden>
+        Save trip to my account
+      </button>
+      <p id="saveTripMessage" class="tool-message" aria-live="polite"></p>
+    </div>
+
+    <div class="tools-card">
+      <h3>Your saved journeys</h3>
+      <p id="accountMessage" class="tool-message" aria-live="polite">
+        Log in to view your saved trips.
+      </p>
+      <button type="button" id="loadTripsButton" class="outline-dark-btn">
+        Load my saved trips
+      </button>
+      <div id="savedTrips"></div>
+    </div>
   </section>
 
   <section class="newsletter" id="about">
-    <span class="eyebrow">A LITTLE INSPIRATION GOES A LONG WAY</span>
+    <span class="eyebrow">YOUR NEXT ADVENTURE AWAITS</span>
     <h2>Your next story is<br><em>out there.</em></h2>
-    <p>Start exploring the extraordinary with WorldTrip.</p>
-    <a href="#destinations" class="gold-btn">Begin exploring ↗</a>
+    <p>Discover more. Live more. Travel better.</p>
+    <a href="#destinations" class="gold-btn">Explore WorldTrip ↗</a>
   </section>
 </main>
 
 <footer>
-  <a class="logo footer-logo" href="#">WORLD<span>TRIP</span><small>YOUR WORLD, REIMAGINED</small></a>
+  <a class="logo footer-logo" href="#home">
+    WORLD<span>TRIP</span>
+    <small>YOUR WORLD, REIMAGINED</small>
+  </a>
   <p>Discover more. Live more. Travel better.</p>
   <p class="creator">Created by BANDI RITHIN REDDY</p>
   <p class="copyright">© <span id="year"></span> WorldTrip. All rights reserved.</p>
 </footer>
 
-<dialog id="loginDialog" class="login-dialog">
-  <button class="dialog-close" id="closeDialog" aria-label="Close">✕</button>
-  <span class="eyebrow dark-eyebrow">WELCOME TO WORLDTRIP</span>
-  <h2>Your journey<br><em>starts here.</em></h2>
-  <form id="loginForm">
-    <label>Email address
-      <input type="email" id="email" placeholder="you@example.com" required>
-    </label>
-    <label>Password
-      <input type="password" id="password" minlength="8" placeholder="At least 8 characters" required>
-    </label>
-    <button class="gold-btn full-btn" type="submit">Continue ↗</button>
-  </form>
-  <p id="loginMessage" class="login-message"></p>
-  <p class="disclaimer">Demo form only. Connect a secure authentication service to enable real accounts.</p>
-</dialog>
-
-<script src="script.js"></script>
-</body>
-</html>
-
-<section class="section worldtrip-tools" id="worldtrip-tools">
-  <span class="eyebrow dark-eyebrow">YOUR WORLD, YOUR BUDGET</span>
-  <h2>Plan smarter.<br><em>Travel further.</em></h2>
-  <p class="tools-intro">
-    Compare budget and premium journeys, explore places on the map
-    and calculate your estimated total trip cost.
-  </p>
-
-  <div class="tools-card">
-    <h3>Explore any destination</h3>
-    <form id="placeSearchForm" class="tool-form">
-      <label>
-        City, town or place
-        <input id="placeQuery" required
-          placeholder="e.g. Vijayawada, Araku Valley, Paris">
-      </label>
-      <button class="gold-btn" type="submit">Find on map ↗</button>
-    </form>
-    <p id="placeMessage" class="tool-message" aria-live="polite"></p>
-    <div id="worldMap" role="region" aria-label="Interactive travel map"></div>
-    <div class="map-links">
-      <a id="directionsLink" href="https://www.openstreetmap.org/"
-         target="_blank" rel="noopener noreferrer">Open directions in OpenStreetMap ↗</a>
-    </div>
-    <p class="disclaimer">
-      Place coverage depends on OpenStreetMap data. Public geocoding
-      services have usage limits and do not guarantee every place.
-    </p>
-  </div>
-
-  <div class="tools-card">
-    <h3>Trip money calculator</h3>
-    <p class="tools-intro">
-      Enter your expected costs for a realistic estimate.
-      All amounts are in Indian rupees.
-    </p>
-
-    <form id="moneyForm" class="tool-form money-form">
-      <label>Starting city
-        <input id="moneyOrigin" required placeholder="e.g. Vijayawada">
-      </label>
-      <label>Destination
-        <input id="moneyDestination" required placeholder="e.g. Bali">
-      </label>
-      <label>Travel style
-        <select id="travelStyle">
-          <option value="budget">Budget</option>
-          <option value="premium">Premium</option>
-        </select>
-      </label>
-      <label>Travelers
-        <input id="moneyTravelers" type="number"
-          min="1" max="100" value="2" required>
-      </label>
-      <label>Days
-        <input id="moneyDays" type="number"
-          min="1" max="365" value="5" required>
-      </label>
-      <label>Transport per traveler (₹)
-        <input id="costTransport" type="number" min="0" value="5000" required>
-      </label>
-      <label>Hotel per room per night (₹)
-        <input id="costHotel" type="number" min="0" value="2000" required>
-      </label>
-      <label>Rooms required
-        <input id="costRooms" type="number" min="1" max="100" value="1" required>
-      </label>
-      <label>Food per person per day (₹)
-        <input id="costFood" type="number" min="0" value="700" required>
-      </label>
-      <label>Local transport per person per day (₹)
-        <input id="costLocal" type="number" min="0" value="300" required>
-      </label>
-      <label>Activities per person (₹)
-        <input id="costActivities" type="number" min="0" value="2000" required>
-      </label>
-      <label>Visa per traveler (₹)
-        <input id="costVisa" type="number" min="0" value="0" required>
-      </label>
-      <label>Other expenses for the group (₹)
-        <input id="costOther" type="number" min="0" value="0" required>
-      </label>
-      <label>Emergency reserve (%)
-        <input id="costReserve" type="number"
-          min="0" max="100" value="10" required>
-      </label>
-      <button class="gold-btn" type="submit">Calculate total ↗</button>
-    </form>
-
-    <div id="moneyResult" class="money-result" hidden
-      aria-live="polite"></div>
-    <button id="saveTripButton" class="gold-btn" hidden>
-      Save trip to my account
-    </button>
-    <p id="saveTripMessage" class="tool-message" aria-live="polite"></p>
-  </div>
-
-  <div class="tools-card">
-    <h3>Your saved journeys</h3>
-    <p id="accountMessage" class="tool-message" aria-live="polite">
-      Log in to view your saved trips.
-    </p>
-    <button id="loadTripsButton" class="outline-dark-btn">
-      Load my saved trips
-    </button>
-    <div id="savedTrips"></div>
-  </div>
-</section>
-
 <div class="auth-backdrop" id="authBackdrop" hidden>
-  <section class="auth-card" role="dialog"
-    aria-modal="true" aria-labelledby="authTitle">
-    <button id="authClose" class="dialog-close"
-      type="button" aria-label="Close">✕</button>
+  <section class="auth-card" role="dialog" aria-modal="true"
+    aria-labelledby="authTitle">
+    <button type="button" id="authClose" class="dialog-close"
+      aria-label="Close">✕</button>
+
     <span class="eyebrow dark-eyebrow">WORLDTRIP ACCOUNT</span>
     <h2 id="authTitle">Welcome<br><em>traveler.</em></h2>
 
     <div class="auth-tabs">
-      <button type="button" data-auth-mode="login" class="auth-tab active">
-        Log in
-      </button>
-      <button type="button" data-auth-mode="signup" class="auth-tab">
-        Create account
-      </button>
+      <button type="button" data-auth-mode="login" class="auth-tab active">Log in</button>
+      <button type="button" data-auth-mode="signup" class="auth-tab">Create account</button>
     </div>
 
     <form id="authForm">
@@ -311,12 +296,11 @@
         <input id="authName" autocomplete="name" maxlength="100">
       </label>
       <label>Email address
-        <input id="authEmail" type="email"
-          autocomplete="email" required>
+        <input id="authEmail" type="email" autocomplete="email" required>
       </label>
       <label>Password
-        <input id="authPassword" type="password"
-          minlength="8" autocomplete="current-password" required>
+        <input id="authPassword" type="password" minlength="8"
+          autocomplete="current-password" required>
       </label>
       <button id="authSubmit" class="gold-btn full-btn" type="submit">
         Log in securely
@@ -327,8 +311,12 @@
       Forgot password?
     </button>
     <p id="authMessage" class="tool-message" aria-live="polite"></p>
-    <button id="logoutButton" class="outline-dark-btn" hidden>
+    <button id="logoutButton" class="outline-dark-btn" type="button" hidden>
       Log out
     </button>
   </section>
 </div>
+
+<script src="script.js"></script>
+</body>
+</html>
