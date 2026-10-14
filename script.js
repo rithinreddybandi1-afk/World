@@ -11,9 +11,8 @@
    Use your own Supabase project URL and public client key.
    Never use a service_role or secret key here.
 */
-
-const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY";
+ const SUPABASE_URL = "YOUR_ACTUAL_PROJECT_URL";
+const SUPABASE_ANON_KEY = "YOUR_ACTUAL_PUBLISHABLE_KEY";
 
 const TABLE_TRIPS = "saved_trips";
 
