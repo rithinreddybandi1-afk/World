@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#081c24">
+  <meta name="description" content="Discover extraordinary destinations worldwide with WorldTrip. Plan your next adventure.">
+  <title>WorldTrip | Explore Beyond Ordinary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <a class="logo" href="#">WORLD<span>TRIP</span><small>YOUR WORLD, REIMAGINED</small></a>
+
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+
+  <nav id="navLinks">
+    <a href="#destinations">Destinations</a>
+    <a href="#experiences">Experiences</a>
+    <a href="#planner">Trip Planner</a>
+    <a href="#about">About</a>
+  </nav>
+
+  <div class="nav-actions">
+    <button class="login-btn" id="loginBtn">Log in</button>
+    <a href="#planner" class="gold-btn">Plan a Trip ↗</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="eyebrow">✦ THE ART OF TRAVEL</span>
+      <h1>The world is<br> yours to <em>discover.</em></h1>
+      <p>Extraordinary places. Unforgettable moments.<br>Your next great story starts here.</p>
+      <div class="hero-actions">
+        <a href="#destinations" class="gold-btn">Explore destinations ↗</a>
+        <a href="#planner" class="outline-btn">Create your journey</a>
+      </div>
+      <div class="hero-note">✦ Curated journeys across the globe</div>
+    </div>
+    <div class="hero-side">DISCOVER MORE · LIVE MORE · TRAVEL BETTER</div>
+  </section>
+
+  <section class="search-wrap">
+    <form class="search-bar" id="searchForm">
+      <label>
+        <span>YOUR DESTINATION</span>
+        <input id="destinationInput" type="search" placeholder="Where do you want to go?">
+      </label>
+      <label>
+        <span>TRAVEL STYLE</span>
+        <select id="categorySelect">
+          <option value="all">All experiences</option>
+          <option value="Beach">Beaches</option>
+          <option value="Culture">Culture & heritage</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Luxury">Luxury escapes</option>
+          <option value="Nature">Nature</option>
+        </select>
+      </label>
+      <button type="submit" class="gold-btn search-btn">Discover ↗</button>
+    </form>
+  </section>
+
+  <section class="section" id="destinations">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow dark-eyebrow">THE WORLD AWAITS</span>
+        <h2>Places that stay<br><em>with you forever.</em></h2>
+      </div>
+      <p>From hidden gems to iconic destinations, find the place that speaks to your soul.</p>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="filter active" data-category="all">All destinations</button>
+      <button class="filter" data-category="Beach">Beach escapes</button>
+      <button class="filter" data-category="Culture">Culture</button>
+      <button class="filter" data-category="Adventure">Adventure</button>
+      <button class="filter" data-category="Luxury">Luxury</button>
+      <button class="filter" data-category="Nature">Nature</button>
+    </div>
+
+    <div class="destination-grid" id="destinationGrid"></div>
+    <p id="emptyMessage" class="empty-message" hidden>No destinations found. Try another search.</p>
+    <div class="center"><button class="outline-dark-btn" id="showMore">Explore all destinations ↗</button></div>
+  </section>
+
+  <section class="experience" id="experiences">
+    <div>
+      <span class="eyebrow">TRAVEL, YOUR WAY</span>
+      <h2>Not just a holiday.<br><em>A feeling.</em></h2>
+      <p>Sunset dinners, mountain air, ancient wonders and slow mornings beside the sea. Choose your own kind of extraordinary.</p>
+      <a href="#planner" class="gold-btn">Find your experience ↗</a>
+    </div>
+    <div class="experience-image"></div>
+  </section>
+
+  <section class="section planner-section" id="planner">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow dark-eyebrow">YOUR JOURNEY BEGINS</span>
+        <h2>Make the world<br><em>your itinerary.</em></h2>
+      </div>
+      <p>Start with a destination and a budget. Build a journey around your interests.</p>
+    </div>
+
+    <form class="planner-card" id="plannerForm">
+      <label>Starting city
+        <input id="startCity" placeholder="e.g. Hyderabad" required>
+      </label>
+      <label>Destination
+        <input id="planDestination" placeholder="e.g. Bali, Indonesia" required>
+      </label>
+      <label>Travelers
+        <select id="travelers">
+          <option value="1">1 traveler</option>
+          <option value="2" selected>2 travelers</option>
+          <option value="3">3 travelers</option>
+          <option value="4">4 travelers</option>
+          <option value="5">5+ travelers</option>
+        </select>
+      </label>
+      <label>Duration
+        <select id="days">
+          <option value="3">3 days / 2 nights</option>
+          <option value="5" selected>5 days / 4 nights</option>
+          <option value="7">7 days / 6 nights</option>
+          <option value="10">10 days / 9 nights</option>
+          <option value="14">14 days / 13 nights</option>
+        </select>
+      </label>
+      <label>Budget per traveler (₹)
+        <input id="budget" type="number" min="1000" placeholder="e.g. 50000" required>
+      </label>
+      <button type="submit" class="gold-btn planner-submit">Create my trip ↗</button>
+    </form>
+    <div id="plannerResult" class="planner-result" hidden></div>
+    <p class="disclaimer">Trip estimates are indicative only and are not live flight or hotel quotations.</p>
+  </section>
+
+  <section class="newsletter" id="about">
+    <span class="eyebrow">A LITTLE INSPIRATION GOES A LONG WAY</span>
+    <h2>Your next story is<br><em>out there.</em></h2>
+    <p>Start exploring the extraordinary with WorldTrip.</p>
+    <a href="#destinations" class="gold-btn">Begin exploring ↗</a>
+  </section>
+</main>
+
+<footer>
+  <a class="logo footer-logo" href="#">WORLD<span>TRIP</span><small>YOUR WORLD, REIMAGINED</small></a>
+  <p>Discover more. Live more. Travel better.</p>
+  <p class="creator">Created by BANDI RITHIN REDDY</p>
+  <p class="copyright">© <span id="year"></span> WorldTrip. All rights reserved.</p>
+</footer>
+
+<dialog id="loginDialog" class="login-dialog">
+  <button class="dialog-close" id="closeDialog" aria-label="Close">✕</button>
+  <span class="eyebrow dark-eyebrow">WELCOME TO WORLDTRIP</span>
+  <h2>Your journey<br><em>starts here.</em></h2>
+  <form id="loginForm">
+    <label>Email address
+      <input type="email" id="email" placeholder="you@example.com" required>
+    </label>
+    <label>Password
+      <input type="password" id="password" minlength="8" placeholder="At least 8 characters" required>
+    </label>
+    <button class="gold-btn full-btn" type="submit">Continue ↗</button>
+  </form>
+  <p id="loginMessage" class="login-message"></p>
+  <p class="disclaimer">Demo form only. Connect a secure authentication service to enable real accounts.</p>
+</dialog>
+
+<script src="script.js"></script>
+</body>
+</html>
