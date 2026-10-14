@@ -179,3 +179,156 @@
 <script src="script.js"></script>
 </body>
 </html>
+
+<section class="section worldtrip-tools" id="worldtrip-tools">
+  <span class="eyebrow dark-eyebrow">YOUR WORLD, YOUR BUDGET</span>
+  <h2>Plan smarter.<br><em>Travel further.</em></h2>
+  <p class="tools-intro">
+    Compare budget and premium journeys, explore places on the map
+    and calculate your estimated total trip cost.
+  </p>
+
+  <div class="tools-card">
+    <h3>Explore any destination</h3>
+    <form id="placeSearchForm" class="tool-form">
+      <label>
+        City, town or place
+        <input id="placeQuery" required
+          placeholder="e.g. Vijayawada, Araku Valley, Paris">
+      </label>
+      <button class="gold-btn" type="submit">Find on map ↗</button>
+    </form>
+    <p id="placeMessage" class="tool-message" aria-live="polite"></p>
+    <div id="worldMap" role="region" aria-label="Interactive travel map"></div>
+    <div class="map-links">
+      <a id="directionsLink" href="https://www.openstreetmap.org/"
+         target="_blank" rel="noopener noreferrer">Open directions in OpenStreetMap ↗</a>
+    </div>
+    <p class="disclaimer">
+      Place coverage depends on OpenStreetMap data. Public geocoding
+      services have usage limits and do not guarantee every place.
+    </p>
+  </div>
+
+  <div class="tools-card">
+    <h3>Trip money calculator</h3>
+    <p class="tools-intro">
+      Enter your expected costs for a realistic estimate.
+      All amounts are in Indian rupees.
+    </p>
+
+    <form id="moneyForm" class="tool-form money-form">
+      <label>Starting city
+        <input id="moneyOrigin" required placeholder="e.g. Vijayawada">
+      </label>
+      <label>Destination
+        <input id="moneyDestination" required placeholder="e.g. Bali">
+      </label>
+      <label>Travel style
+        <select id="travelStyle">
+          <option value="budget">Budget</option>
+          <option value="premium">Premium</option>
+        </select>
+      </label>
+      <label>Travelers
+        <input id="moneyTravelers" type="number"
+          min="1" max="100" value="2" required>
+      </label>
+      <label>Days
+        <input id="moneyDays" type="number"
+          min="1" max="365" value="5" required>
+      </label>
+      <label>Transport per traveler (₹)
+        <input id="costTransport" type="number" min="0" value="5000" required>
+      </label>
+      <label>Hotel per room per night (₹)
+        <input id="costHotel" type="number" min="0" value="2000" required>
+      </label>
+      <label>Rooms required
+        <input id="costRooms" type="number" min="1" max="100" value="1" required>
+      </label>
+      <label>Food per person per day (₹)
+        <input id="costFood" type="number" min="0" value="700" required>
+      </label>
+      <label>Local transport per person per day (₹)
+        <input id="costLocal" type="number" min="0" value="300" required>
+      </label>
+      <label>Activities per person (₹)
+        <input id="costActivities" type="number" min="0" value="2000" required>
+      </label>
+      <label>Visa per traveler (₹)
+        <input id="costVisa" type="number" min="0" value="0" required>
+      </label>
+      <label>Other expenses for the group (₹)
+        <input id="costOther" type="number" min="0" value="0" required>
+      </label>
+      <label>Emergency reserve (%)
+        <input id="costReserve" type="number"
+          min="0" max="100" value="10" required>
+      </label>
+      <button class="gold-btn" type="submit">Calculate total ↗</button>
+    </form>
+
+    <div id="moneyResult" class="money-result" hidden
+      aria-live="polite"></div>
+    <button id="saveTripButton" class="gold-btn" hidden>
+      Save trip to my account
+    </button>
+    <p id="saveTripMessage" class="tool-message" aria-live="polite"></p>
+  </div>
+
+  <div class="tools-card">
+    <h3>Your saved journeys</h3>
+    <p id="accountMessage" class="tool-message" aria-live="polite">
+      Log in to view your saved trips.
+    </p>
+    <button id="loadTripsButton" class="outline-dark-btn">
+      Load my saved trips
+    </button>
+    <div id="savedTrips"></div>
+  </div>
+</section>
+
+<div class="auth-backdrop" id="authBackdrop" hidden>
+  <section class="auth-card" role="dialog"
+    aria-modal="true" aria-labelledby="authTitle">
+    <button id="authClose" class="dialog-close"
+      type="button" aria-label="Close">✕</button>
+    <span class="eyebrow dark-eyebrow">WORLDTRIP ACCOUNT</span>
+    <h2 id="authTitle">Welcome<br><em>traveler.</em></h2>
+
+    <div class="auth-tabs">
+      <button type="button" data-auth-mode="login" class="auth-tab active">
+        Log in
+      </button>
+      <button type="button" data-auth-mode="signup" class="auth-tab">
+        Create account
+      </button>
+    </div>
+
+    <form id="authForm">
+      <label id="nameField" hidden>Full name
+        <input id="authName" autocomplete="name" maxlength="100">
+      </label>
+      <label>Email address
+        <input id="authEmail" type="email"
+          autocomplete="email" required>
+      </label>
+      <label>Password
+        <input id="authPassword" type="password"
+          minlength="8" autocomplete="current-password" required>
+      </label>
+      <button id="authSubmit" class="gold-btn full-btn" type="submit">
+        Log in securely
+      </button>
+    </form>
+
+    <button id="resetPasswordButton" class="text-button" type="button">
+      Forgot password?
+    </button>
+    <p id="authMessage" class="tool-message" aria-live="polite"></p>
+    <button id="logoutButton" class="outline-dark-btn" hidden>
+      Log out
+    </button>
+  </section>
+</div>
