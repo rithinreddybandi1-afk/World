@@ -11,9 +11,8 @@
    Use your own Supabase project URL and public client key.
    Never use a service_role or secret key here.
 */
- const SUPABASE_URL = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwcndpbWJ0Z2lyZXRkeGNwYXNwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE5OTQ2NTksImV4cCI6MjEwNzU3MDY1OX0.MvRtoT6NyaB13a0qw1TmYPDneupKrTXDBw_hr90D8tA";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwcndpbWJ0Z2lyZXRkeGNwYXNwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc5MTk5NDY1OSwiZXhwIjoyMTA3NTcwNjU5fQ.IxnX-EGCZvJr4tSRghy-9k0By2Ciz4vm4Q7xKrmS6Iw";
-
+  const SUPABASE_URL = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwcndpbWJ0Z2lyZXRkeGNwYXNwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE5OTQ2NTksImV4cCI6MjEwNzU3MDY1OX0.MvRtoT6NyaB13a0qw1TmYPDneupKrTXDBw_hr90D8tA";
+const SUPABASE_ANON_KEY = "PASTE_YOUR_ANON_KEY_HERE";
 const TABLE_TRIPS = "saved_trips";
 
 const hasSupabaseConfig =
